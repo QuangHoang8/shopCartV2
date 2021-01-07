@@ -1,3 +1,5 @@
+import classes from "./Item.module.css";
+import numberFormat from "./FormatCurrency.js";
 function Item({
   src,
   name,
@@ -5,7 +7,7 @@ function Item({
   price,
   quantity,
   onRemoveProduct,
-  onChangeAmount,
+  onQuantityChanged,
 }) {
   return (
     <li className="row">
@@ -19,8 +21,8 @@ function Item({
           <div className="name">
             <a href="/">{name}</a>
           </div>
-          <div className="description">{description}</div>
-          <div className="price">${price}</div>
+          <div className={classes.listItemDescription}>{description}</div>
+          <div className="price">{numberFormat(price)}</div>
         </div>
       </div>
       <div className="col right">
@@ -30,7 +32,7 @@ function Item({
             className="quantity"
             step={1}
             value={quantity}
-            onChange={() => onChangeAmount(name)}
+            onChange={(e) => onQuantityChanged(e.target.value, name)}
           />
         </div>
         <div className="remove">
